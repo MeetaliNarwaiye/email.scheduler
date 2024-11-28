@@ -3,12 +3,8 @@ package com.project.email.scheduler.audit.audit_log.service;
 import com.project.email.scheduler.audit.audit_log.dao.AuditLog;
 import com.project.email.scheduler.audit.audit_log.dao.AuditLogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,29 +30,26 @@ public class AuditLogService {
         return repo.saveAll(data);
     }
 
-    public List<AuditLog> getByObjectGroupAndGroupKey(String objectGroup, String groupKey) {
-        return repo.findAllByObjectGroupAndGroupKey(objectGroup, groupKey);
-    }
 
-    public Object findAll(List<AuditLog> data, Integer page, Integer size, Sort sort) {
-
-        if (data == null) {
-            AuditLog temp = new AuditLog();
-            data = new ArrayList<>();
-            data.add(temp);
-        }
-
-        // if data is null send full dataset
-        if (page != null) {
-            Pageable pageable = null;
-
-            if (sort.isEmpty()) pageable = PageRequest.of(page, size);
-            else pageable = PageRequest.of(page, size, sort);
-
-            return repo.findAllByAnyField(data, pageable);
-        } else {
-            return repo.findAllByAnyField(data);
-        }
-    }
+//    public Object findAll(List<AuditLog> data, Integer page, Integer size, Sort sort) {
+//
+//        if (data == null) {
+//            AuditLog temp = new AuditLog();
+//            data = new ArrayList<>();
+//            data.add(temp);
+//        }
+//
+//        // if data is null send full dataset
+//        if (page != null) {
+//            Pageable pageable = null;
+//
+//            if (sort.isEmpty()) pageable = PageRequest.of(page, size);
+//            else pageable = PageRequest.of(page, size, sort);
+//
+//            return repo.findAllByAnyField(data, pageable);
+//        } else {
+//            return repo.findAllByAnyField(data);
+//        }
+//    }
 
 }

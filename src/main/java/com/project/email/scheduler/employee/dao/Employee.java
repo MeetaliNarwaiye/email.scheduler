@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
 import java.util.Date;
 
 @Entity
@@ -22,38 +23,38 @@ import java.util.Date;
 @DynamicInsert
 @DynamicUpdate
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Long employeeId;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "hire_date", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date hireDate;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "job_title", nullable = false, length = 50)
     private String jobTitle;
 
-    @Column
+    @Column(name = "birthday")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthday;
 
-    @Column(length = 255)
+    @Column(name = "address", length = 255)
     private String address;
 
-    @Column(length = 10)
+    @Column(name = "gender", length = 10)
     private String gender;
 
-    @Column(nullable = false, length = 15, unique = true)
+    @Column(name = "mobile_no", nullable = false, length = 15, unique = true)
     private String mobileNo;
 
 }

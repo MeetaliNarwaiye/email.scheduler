@@ -117,8 +117,8 @@ public class AuditListenerProcess {
             JSONObject idsValues = getIds(object);
             String groupKey = null;
             if (configAudit != null && configAudit.getGroupKeyField() != null) {
-                groupKey = idsValues.has(configAudit.getGroupKeyField().toLowerCase()) ?
-                        idsValues.get(configAudit.getGroupKeyField().toLowerCase()).toString() : null;
+                groupKey = idsValues.has(configAudit.getGroupKeyField()) ?
+                        idsValues.get(configAudit.getGroupKeyField()).toString() : null;
             }
 
             Iterator<String> keys = updatedValues.keys();
@@ -147,7 +147,9 @@ public class AuditListenerProcess {
                             .oldValue(oldValue)
                             .newValue(newValue)
                             .tableName(tableName)
-                            .tableKey(idsValues.keySet().stream().map(idsValues::getString).collect(Collectors.joining("|")))
+                            .tableKey(idsValues.keySet().stream()
+                                    .map(n -> String.valueOf(idsValues.get(n)))
+                                    .collect(Collectors.joining("|")))
                             .groupKey(groupKey)
                             .objectGroup(configAudit != null ? configAudit.getObjectGroup() : null)
                             .action("U")
@@ -208,8 +210,8 @@ public class AuditListenerProcess {
         JSONObject idsValues = getIds(object);
         String groupKey = null;
         if (configAudit != null && configAudit.getGroupKeyField() != null) {
-            groupKey = idsValues.has(configAudit.getGroupKeyField().toLowerCase()) ?
-                    idsValues.get(configAudit.getGroupKeyField().toLowerCase()).toString() : null;
+            groupKey = idsValues.has(configAudit.getGroupKeyField()) ?
+                    idsValues.get(configAudit.getGroupKeyField()).toString() : null;
         }
 
         Iterator<String> keys = addedValues.keys();
@@ -226,7 +228,9 @@ public class AuditListenerProcess {
                         .oldValue(null)
                         .newValue(newValue)
                         .tableName(tableName)
-                        .tableKey(idsValues.keySet().stream().map(idsValues::getString).collect(Collectors.joining("|")))
+                        .tableKey(idsValues.keySet().stream()
+                                .map(n -> String.valueOf(idsValues.get(n)))
+                                .collect(Collectors.joining("|")))
                         .groupKey(groupKey)
                         .objectGroup(configAudit != null ? configAudit.getObjectGroup() : null)
                         .action("I")
@@ -284,8 +288,8 @@ public class AuditListenerProcess {
         JSONObject idsValues = getIds(object);
         String groupKey = null;
         if (configAudit != null && configAudit.getGroupKeyField() != null) {
-            groupKey = idsValues.has(configAudit.getGroupKeyField().toLowerCase()) ?
-                    idsValues.get(configAudit.getGroupKeyField().toLowerCase()).toString() : null;
+            groupKey = idsValues.has(configAudit.getGroupKeyField()) ?
+                    idsValues.get(configAudit.getGroupKeyField()).toString() : null;
         }
 
         List<JSONObject> allOldValues = variables.getOldValues().get(tableName);
@@ -322,8 +326,9 @@ public class AuditListenerProcess {
                         .oldValue(oldValue)
                         .newValue(null)
                         .tableName(tableName)
-                        .tableKey(idsValues.keySet().stream().map(idsValues::getString).collect(Collectors.joining("|")))
-                        .groupKey(groupKey)
+                        .tableKey(idsValues.keySet().stream()
+                                .map(n -> String.valueOf(idsValues.get(n)))
+                                .collect(Collectors.joining("|"))).groupKey(groupKey)
                         .objectGroup(configAudit != null ? configAudit.getObjectGroup() : null)
                         .action("D")
                         .build());

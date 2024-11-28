@@ -63,10 +63,6 @@ public class AuditLogI {
     @Column(name = "change_id")
     Integer changeId;
 
-    @Column(name = "created_by", updatable = false)
-    @JsonProperty(value = "created_by", access = JsonProperty.Access.READ_ONLY)
-    String createdBy;
-
 
     @Column(name = "created_on", insertable = false, updatable = false)
     @JsonProperty(value = "created_on", access = JsonProperty.Access.READ_ONLY)
