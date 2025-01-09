@@ -1,4 +1,4 @@
-package com.project.email.scheduler.employee.dao;
+package com.project.email.scheduler.audit.employee.dao;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

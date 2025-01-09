@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "AUDIT_LOG_I")
@@ -66,11 +69,11 @@ public class AuditLogI {
 
     @Column(name = "created_on", insertable = false, updatable = false)
     @JsonProperty(value = "created_on", access = JsonProperty.Access.READ_ONLY)
-    String createdOn;
+    LocalDate createdOn;
 
 
     @Column(name = "created_at", insertable = false, updatable = false)
     @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
-    String createdAt;
+    LocalDateTime createdAt;
 
 }

@@ -1,7 +1,7 @@
-package com.project.email.scheduler.employee.service;
+package com.project.email.scheduler.audit.employee.service;
 
-import com.project.email.scheduler.employee.dao.Employee;
-import com.project.email.scheduler.employee.dao.EmployeeRepo;
+import com.project.email.scheduler.audit.employee.dao.Employee;
+import com.project.email.scheduler.audit.employee.dao.EmployeeRepo;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;

@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +23,8 @@ public class EmailRequest {
     @NotEmpty
     private String subject;
 
-    @NotEmpty
-    private String body;
+//    @NotEmpty
+//    private String body;
 
     @NotNull
     private LocalDateTime dateTime;
