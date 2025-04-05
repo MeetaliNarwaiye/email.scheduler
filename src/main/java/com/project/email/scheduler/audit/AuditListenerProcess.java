@@ -60,6 +60,7 @@ public class AuditListenerProcess {
         } else {
             System.out.println("The provided object is not a JPA entity.");
         }
+
         return jsonObject;
     }
 

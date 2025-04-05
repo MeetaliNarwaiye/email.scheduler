@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmailResponse {
+public class CalendarLogResponse {
     private boolean success;
     private String jobId;
     private String jobGroup;

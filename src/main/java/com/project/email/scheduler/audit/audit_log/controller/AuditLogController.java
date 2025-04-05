@@ -22,7 +22,7 @@ public class AuditLogController {
     AuditLogService service;
 
     @PostMapping("/get")
-    public List<AuditLog> get(@RequestBody List<Long> ids) {
+    public List<AuditLog> get(@RequestBody List<Integer> ids) {
         return service.getAll(ids);
     }
 

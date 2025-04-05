@@ -34,6 +34,9 @@ public class EmployeeService {
         if (employee.getGender() != null && !isValidGender(employee.getGender())) {
             throw new IllegalArgumentException("Invalid gender value");
         }
+        if (repo.existsById(employee.getEmployeeId())) {
+            throw new RuntimeException("Employee ID already exists");
+        }
         return repo.save(employee);
     }
 

@@ -18,7 +18,7 @@ public class AuditLogService {
         return repo.findAll();
     }
 
-    public List<AuditLog> getAll(List<Long> id) {
+    public List<AuditLog> getAll(List<Integer> id) {
         return repo.findAllById(id);
     }
 
