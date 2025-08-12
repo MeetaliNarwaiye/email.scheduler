@@ -15,7 +15,7 @@ public class ConfigAuditController {
     @Autowired
     ConfigAuditService service;
 
-    @GetMapping("/get")
+    @GetMapping("/getAll")
     public List<ConfigAudit> get() {
         return service.getAll();
     }

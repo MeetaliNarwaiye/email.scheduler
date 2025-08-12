@@ -26,7 +26,7 @@ public class AuditLogController {
         return service.getAll(ids);
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public List<AuditLog> createAll(@Valid @RequestBody List<AuditLog> data) {
         return service.createAll(data);
     }

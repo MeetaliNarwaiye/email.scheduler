@@ -65,38 +65,34 @@ public class CalendarEventJob implements Job {
 
         List<String> description = new ArrayList<>();
 
-        if (!todayLogs.isEmpty()) {
-            AuditLog firstLog = todayLogs.get(0); // Use the first log as base time
-            for (AuditLog logEntry : todayLogs) {
-                description.add(logEntry.getObjectGroup());
-            }
+        AuditLog firstLog = todayLogs.get(0); // Use the first log as base time
+        for (AuditLog logEntry : todayLogs) {
+            description.add(logEntry.getObjectGroup());
+        }
 
-            try {
-                // Format datetime in RFC 3339 (ISO 8601) format
-                ZonedDateTime startZdt = firstLog.getCreatedOn().atTime(9, 0).atZone(ZoneId.of("Asia/Kolkata"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-                String startDateTime = startZdt.toOffsetDateTime().format(formatter);
-                String endDateTime = startZdt.plusMinutes(30).toOffsetDateTime().format(formatter);
+        try {
+            // Format datetime in RFC 3339 (ISO 8601) format
+            ZonedDateTime startZdt = firstLog.getCreatedOn().atTime(9, 0).atZone(ZoneId.of("Asia/Kolkata"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+            String startDateTime = startZdt.toOffsetDateTime().format(formatter);
+            String endDateTime = startZdt.plusMinutes(30).toOffsetDateTime().format(formatter);
 
 
-                Event event = new Event()
-                        .setSummary(eventTitle + " - " + LocalDate.now())
-                        .setDescription("Tables updated: " + description)
-                        .setStart(new EventDateTime().setDateTime(new com.google.api.client.util.DateTime(startDateTime)).setTimeZone("Asia/Kolkata"))
-                        .setEnd(new EventDateTime().setDateTime(new com.google.api.client.util.DateTime(endDateTime)).setTimeZone("Asia/Kolkata"));
+            Event event = new Event()
+                    .setSummary(eventTitle + " - " + LocalDate.now())
+                    .setDescription("Tables updated: " + description)
+                    .setStart(new EventDateTime().setDateTime(new com.google.api.client.util.DateTime(startDateTime)).setTimeZone("Asia/Kolkata"))
+                    .setEnd(new EventDateTime().setDateTime(new com.google.api.client.util.DateTime(endDateTime)).setTimeZone("Asia/Kolkata"));
 
 //                googleCalendar.events().insert(calendarId, event).execute();
 
-                Event createdEvent = googleCalendar.events().insert(calendarId, event).execute();
-                log.info("📅 Event link: {}", createdEvent.getHtmlLink());
+            Event createdEvent = googleCalendar.events().insert(calendarId, event).execute();
+            log.info("Event link: {}", createdEvent.getHtmlLink());
 
-                log.info("✅ Successfully stored log in Google Calendar: {}", description);
+            log.info("Successfully stored log in Google Calendar: {}", description);
 
-            } catch (Exception e) {
-                log.error("❌ Failed to store audit log in Google Calendar: {}", description, e);
-            }
-        } else {
-            log.info("No logs found for today.");
+        } catch (Exception e) {
+            log.error("Failed to store audit log in Google Calendar: {}", description, e);
         }
 
 

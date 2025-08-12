@@ -36,7 +36,7 @@ public class AuditLogIController {
 //        return service.findAll(data, page, size, sort);
 //    }
 
-    @PostMapping()
+    @PostMapping("/create")
     public List<AuditLogI> createAll(@Valid @RequestBody List<AuditLogI> data) {
         return service.createAll(data);
     }
